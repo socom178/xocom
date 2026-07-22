@@ -1,8 +1,12 @@
-/* ---- Particle Canvas ---- */
-(function() {
+/* =============================================
+   SOCOM WEB AGENCY — script.js
+============================================= */
+
+/* ---- 1. Particle Canvas ---- */
+(function () {
   const canvas = document.getElementById('particle-canvas');
   const ctx = canvas.getContext('2d');
-  let W, H, particles = [], animId;
+  let W, H, particles = [];
 
   function resize() {
     W = canvas.width  = window.innerWidth;
@@ -10,8 +14,8 @@
   }
 
   function Particle() {
-    this.x = Math.random() * W;
-    this.y = Math.random() * H;
+    this.x  = Math.random() * W;
+    this.y  = Math.random() * H;
     this.vx = (Math.random() - 0.5) * 0.4;
     this.vy = (Math.random() - 0.5) * 0.4;
     this.r  = Math.random() * 1.5 + 0.5;
@@ -25,6 +29,10 @@
 
   function draw() {
     ctx.clearRect(0, 0, W, H);
+    const isLight = document.documentElement.dataset.theme === 'light';
+    const dotColor  = isLight ? '37,99,235'  : '96,165,250';
+    const lineColor = isLight ? '37,99,235'  : '37,99,235';
+
     for (let i = 0; i < particles.length; i++) {
       const p = particles[i];
       p.x += p.vx; p.y += p.vy;
@@ -33,24 +41,24 @@
 
       ctx.beginPath();
       ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(96,165,250,${p.a})`;
+      ctx.fillStyle = `rgba(${dotColor},${p.a})`;
       ctx.fill();
 
       for (let j = i + 1; j < particles.length; j++) {
         const q = particles[j];
         const dx = p.x - q.x, dy = p.y - q.y;
-        const dist = Math.sqrt(dx*dx + dy*dy);
+        const dist = Math.sqrt(dx * dx + dy * dy);
         if (dist < 140) {
           ctx.beginPath();
           ctx.moveTo(p.x, p.y);
           ctx.lineTo(q.x, q.y);
-          ctx.strokeStyle = `rgba(37,99,235,${0.15 * (1 - dist / 140)})`;
+          ctx.strokeStyle = `rgba(${lineColor},${0.15 * (1 - dist / 140)})`;
           ctx.lineWidth = 0.6;
           ctx.stroke();
         }
       }
     }
-    animId = requestAnimationFrame(draw);
+    requestAnimationFrame(draw);
   }
 
   resize();
@@ -59,9 +67,10 @@
   window.addEventListener('resize', () => { resize(); initParticles(60); });
 })();
 
-/* ---- Navbar scroll ---- */
+/* ---- 2. Navbar scroll ---- */
 const navbar = document.getElementById('navbar');
 const backTop = document.getElementById('backTop');
+
 window.addEventListener('scroll', () => {
   if (window.scrollY > 60) {
     navbar.classList.add('scrolled');
@@ -70,16 +79,16 @@ window.addEventListener('scroll', () => {
     navbar.classList.remove('scrolled');
     backTop.classList.remove('visible');
   }
-});
+}, { passive: true });
 
-/* ---- Intersection Observer (reveal) ---- */
+/* ---- 3. Intersection Observer (reveal) ---- */
 const io = new IntersectionObserver((entries) => {
-  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
 }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
 
 document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => io.observe(el));
 
-/* ---- Animated Counters ---- */
+/* ---- 4. Animated Counters ---- */
 const counterObserver = new IntersectionObserver((entries) => {
   entries.forEach(e => {
     if (e.isIntersecting && !e.target.dataset.done) {
@@ -98,37 +107,30 @@ const counterObserver = new IntersectionObserver((entries) => {
 
 document.querySelectorAll('.counter').forEach(el => counterObserver.observe(el));
 
-/* ---- Mobile Menu ---- */
+/* ---- 5. Mobile Menu ---- */
 function toggleMenu() {
   const m = document.getElementById('mobileMenu');
   m.classList.toggle('open');
   document.body.style.overflow = m.classList.contains('open') ? 'hidden' : '';
 }
 
-/* ---- FAQ ---- */
+/* ---- 6. FAQ ---- */
 function toggleFaq(btn) {
-  const item = btn.closest('.faq-item');
+  const item   = btn.closest('.faq-item');
   const isOpen = item.classList.contains('open');
   document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
   if (!isOpen) item.classList.add('open');
 }
 
-/* ---- Portfolio Filters ---- */
+/* ---- 7. Portfolio Filters ---- */
 document.querySelectorAll('.filter-btn').forEach(btn => {
-  btn.addEventListener('click', function() {
+  btn.addEventListener('click', function () {
     document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
     this.classList.add('active');
   });
 });
 
-/* ---- Form Submit ---- */
-function submitForm() {
-  const toast = document.getElementById('toast');
-  toast.classList.add('show');
-  setTimeout(() => toast.classList.remove('show'), 4500);
-}
-
-/* ---- Smooth active nav link ---- */
+/* ---- 8. Active nav link on scroll ---- */
 const sections = document.querySelectorAll('section[id]');
 window.addEventListener('scroll', () => {
   let current = '';
@@ -139,3 +141,22 @@ window.addEventListener('scroll', () => {
     a.style.color = a.getAttribute('href') === `#${current}` ? 'var(--white)' : '';
   });
 }, { passive: true });
+
+/* ---- 9. THEME TOGGLE (Mode clair / sombre) ---- */
+const html        = document.documentElement;
+const themeToggle = document.getElementById('themeToggle');
+const THEME_KEY   = 'socom-theme';
+
+// Applique le thème sauvegardé au chargement
+const savedTheme = localStorage.getItem(THEME_KEY);
+if (savedTheme) html.dataset.theme = savedTheme;
+
+function toggleTheme() {
+  const isLight = html.dataset.theme === 'light';
+  html.dataset.theme = isLight ? '' : 'light';
+  localStorage.setItem(THEME_KEY, html.dataset.theme);
+}
+
+if (themeToggle) {
+  themeToggle.addEventListener('click', toggleTheme);
+}
