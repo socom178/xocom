@@ -23,7 +23,8 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; font-size: 16px; }
     body {
-      background: var(--ink);
+      /*background: var(--ink);*/
+      background: linear-gradient(180deg, #0A0E1A, #111827);
       color: var(--white);
       font-family: var(--ff-body);
       line-height: 1.6;
@@ -34,7 +35,9 @@
     a { text-decoration: none; color: inherit; }
     ul { list-style: none; }
     button { cursor: pointer; border: none; background: none; font-family: inherit; }
-
+    .logo{
+      height: 9vh;
+      width:8vw ;    }
     /* =============================================
        TYPOGRAPHY SCALE
     ============================================= */
@@ -121,11 +124,9 @@
     .btn-primary {
       background: var(--blue-core);
       color: var(--white);
-      box-shadow: 0 0 0 1px rgba(37,99,235,0.5), 0 8px 24px rgba(37,99,235,0.35);
     }
     .btn-primary:hover {
       background: #1D4ED8;
-      box-shadow: 0 0 0 1px rgba(37,99,235,0.8), 0 12px 32px rgba(37,99,235,0.5);
       transform: translateY(-2px);
     }
     .btn-ghost {
@@ -149,6 +150,7 @@
       z-index: 1000;
       padding: 20px 0;
       transition: var(--transition);
+      border-bottom: 1px solid var(--border);
     }
     .nav.scrolled {
       background: rgba(7,13,26,0.92);
@@ -167,7 +169,7 @@
     }
     .nav-logo {
       font-family: var(--ff-display);
-      font-size: 1.25rem;
+      font-size: 1.5rem;
       font-weight: 700;
       letter-spacing: -0.02em;
       display: flex;
@@ -180,7 +182,6 @@
       border-radius: 8px;
       display: flex; align-items: center; justify-content: center;
       font-size: 0.85rem; font-weight: 700;
-      box-shadow: 0 0 16px rgba(37,99,235,0.4);
     }
     .nav-links { display: flex; align-items: center; gap: 36px; }
     .nav-links a {
@@ -254,7 +255,8 @@
     .hero-gradient {
       position: absolute;
       inset: 0;
-      background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(37,99,235,0.12) 0%, transparent 70%);
+      background: linear-gradient(180deg, #0A0E1A, #111827)
+      radial-gradient(ellipse 80% 60% at 50% 40%, rgba(37,99,235,0.12) 0%, transparent 70%);
       pointer-events: none;
     }
     .hero-inner {
@@ -388,7 +390,6 @@
       top: -60px; right: -60px;
       width: 240px; height: 240px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(37,99,235,0.2) 0%, transparent 70%);
     }
     .about-card-main::after {
       content: '';
@@ -396,7 +397,6 @@
       bottom: -30px; left: -30px;
       width: 160px; height: 160px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(96,165,250,0.1) 0%, transparent 70%);
     }
     .about-floating-stat {
       position: absolute;
@@ -405,7 +405,6 @@
       border: 1px solid rgba(37,99,235,0.4);
       border-radius: var(--radius-md);
       padding: 16px 20px;
-      backdrop-filter: blur(10px);
       text-align: center;
     }
     .about-floating-stat .num {
@@ -418,7 +417,7 @@
     .about-floating-stat .lbl { font-size: 0.75rem; color: var(--muted); margin-top: 4px; }
     .about-code-card {
       position: absolute;
-      bottom: 60px; right: -32px;
+      bottom: 70px; right: -32px;
       background: #0D1B2E;
       border: 1px solid var(--border);
       border-radius: var(--radius-md);
@@ -583,7 +582,6 @@
       bottom: -30px; right: -30px;
       width: 120px; height: 120px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(37,99,235,0.15) 0%, transparent 70%);
     }
     .why-stat-num {
       font-family: var(--ff-display);
@@ -627,7 +625,8 @@
       transition: var(--transition);
       cursor: pointer;
     }
-    .portfolio-card:hover { transform: translateY(-6px); border-color: rgba(37,99,235,0.4); box-shadow: 0 20px 48px rgba(0,0,0,0.4); }
+    .portfolio-card:hover { transform: translateY(-6px); border-color: rgba(37,99,235,0.4); 
+      box-shadow: 0 20px 48px rgba(0,0,0,0.4); }
     .portfolio-thumb {
       height: 220px;
       position: relative;
@@ -742,7 +741,6 @@
     .process-step:hover .process-dot {
       background: var(--blue-glow);
       border-color: var(--blue-core);
-      box-shadow: 0 0 24px rgba(37,99,235,0.3);
     }
     .process-dot svg { color: var(--blue-light); }
     .process-step h4 {
@@ -860,8 +858,7 @@
       outline: none;
     }
     .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
-      border-color: var(--blue-core);
-      box-shadow: 0 0 0 3px rgba(37,99,235,0.12);
+      border-color: #555; outline: none; 
     }
     .form-group textarea { min-height: 120px; resize: vertical; }
     .form-group select option { background: var(--ink); }
@@ -994,7 +991,6 @@
       transform: translateY(16px);
       transition: var(--transition);
       z-index: 500;
-      box-shadow: 0 4px 20px rgba(37,99,235,0.4);
     }
     .back-top.visible { opacity: 1; transform: none; }
     .back-top:hover { background: #1D4ED8; transform: translateY(-2px); }
