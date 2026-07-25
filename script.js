@@ -5,14 +5,14 @@
 /* =============================================
    ⚙️  CONFIG EMAILJS — Remplace par tes vraies clés
 ============================================= */
-const EMAILJS_PUBLIC_KEY  = "X30e-BC4l_r9ACQD4";    // Account → Public Key
+const EMAILJS_PUBLIC_KEY  = "X30e-BC4l_r9ACQD4";  // Account → Public Key
 const EMAILJS_SERVICE_ID  = "service_k11y85k";    // Email Services → Service ID
 const EMAILJS_TEMPLATE_ID = "template_wiucz0h";   // Email Templates → Template ID
 
 /* ---- Init EmailJS ---- */
 (function () {
   if (typeof emailjs !== 'undefined') {
-    emailjs.init(EMAILJS_PUBLIC_KEY);
+    emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
   }
 })();
 
@@ -264,8 +264,9 @@ if (form) {
         throw new Error('EmailJS non chargé. Vérifiez la connexion internet.');
       }
 
-      await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams);
-
+      await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams, {
+        publicKey: EMAILJS_PUBLIC_KEY
+      });
       showToast('✅ Votre demande a été envoyée ! Nous vous répondrons sous 24h.', true);
       form.reset();
 
