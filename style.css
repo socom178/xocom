@@ -457,6 +457,9 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
    HERO
 ============================================= */
 .hero {
+  margin: 0;
+}
+.slide{
   position: relative;
   min-height: 100vh;
   display: flex;
