@@ -4,6 +4,7 @@
 :root {
   --ink:        #070D1A;
   --surface:    #0E1628;
+  --surface1:   #152958;
   --surface-2:  #141E35;
   --border:     rgba(255,255,255,0.08);
   --blue-core:  #2563EB;
@@ -666,7 +667,47 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 /* =============================================
    SERVICES
 ============================================= */
+.services-grid1 {
+  padding-top: 10vh;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 5vw;
+  background: transparent;
+  overflow: hidden;
+}
+.service-card1 {
+  margin-top: -8vh;
+  background: transparent;
+  padding: 10px 15px;
+  font-size: 15px;
+  border: 1px solid #31487ec7;;
+  border-radius: 15px;
+  position: relative;
+  overflow: hidden;
+  transition: background var(--transition);
+}
+.service-card1 h3 {
+  margin-left: 3vw;
+  font-family: var(--ff-display);
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+.service-card1:hover { background: var(--surface-2); }
+.service-card1::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--blue-core), var(--blue-light));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--transition);
+}
+.service-card1:hover::before { transform: scaleX(1); }
+
+
 .services-grid {
+  margin-top: 8vh;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 2px;
