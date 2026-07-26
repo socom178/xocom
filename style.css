@@ -1329,6 +1329,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   .about-grid, .why-grid, .contact-grid { grid-template-columns: 1fr; gap: 48px; }
   .about-visual { display: none; }
   .services-grid { grid-template-columns: repeat(2, 1fr); }
+  .service-card1 {margin-top: 1vh;}
   .portfolio-grid { grid-template-columns: repeat(2, 1fr); }
   .testimonials-grid { grid-template-columns: repeat(2, 1fr); }
   .footer-grid { grid-template-columns: 1fr 1fr; }
