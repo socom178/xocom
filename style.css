@@ -189,9 +189,10 @@ body {
   color: var(--white);
   font-family: var(--ff-body);
   line-height: 1.6;
-  overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   transition: background 0.4s ease, color 0.4s ease;
+  overflow-x: hidden;
+  max-width: 100%;
 }
 img { max-width: 100%; display: block; }
 a { text-decoration: none; color: inherit; }
