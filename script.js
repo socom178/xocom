@@ -7,7 +7,7 @@
 ============================================= */
 const EMAILJS_PUBLIC_KEY  = "X30e-BC4l_r9ACQD4";  // Account → Public Key
 const EMAILJS_SERVICE_ID  = "service_k11y85k";    // Email Services → Service ID
-const EMAILJS_TEMPLATE_ID = "template_wiucz0h";   // Email Templates → Template ID
+const EMAILJS_TEMPLATE_ID = "template_r8yi4am";   // Email Templates → Template ID
 
 /* ---- Init EmailJS ---- */
 (function () {
