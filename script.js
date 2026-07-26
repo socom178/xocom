@@ -8,6 +8,7 @@
 const EMAILJS_PUBLIC_KEY  = "X30e-BC4l_r9ACQD4";  // Account → Public Key
 const EMAILJS_SERVICE_ID  = "service_k11y85k";    // Email Services → Service ID
 const EMAILJS_TEMPLATE_ID = "template_r8yi4am";   // Email Templates → Template ID
+const EMAILJS_TEMPLATE_ID_ADMIN = "template_qfxd99r";
 
 /* ---- Init EmailJS ---- */
 (function () {
@@ -264,11 +265,18 @@ if (form) {
         throw new Error('EmailJS non chargé. Vérifiez la connexion internet.');
       }
 
-      await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams, {
-        publicKey: EMAILJS_PUBLIC_KEY
-      });
-      showToast('✅ Votre demande a été envoyée ! Nous vous répondrons sous 24h.', true);
-      form.reset();
+      await Promise.all([
+        // Email de confirmation → au client
+        emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams, {
+          publicKey: EMAILJS_PUBLIC_KEY
+        }),
+        showToast('✅ Votre demande a été envoyée ! Nous vous répondrons sous 24h.', true),
+        form.reset(),
+        // Email avec détails → à toi
+        emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID_ADMIN, templateParams, {
+          publicKey: EMAILJS_PUBLIC_KEY
+        })
+      ]);
 
     } catch (error) {
       console.error('EmailJS error:', error);
